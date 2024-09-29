@@ -1,40 +1,31 @@
 import java.util.*;
+
 class Solution {
     public int solution(int[] mats, String[][] park) {
-    
         int answer = -1;
+        int rows = park.length;
+        int cols = park[0].length;
+        
         Arrays.sort(mats);
-       
-        for(int i = mats.length-1; i>=0; i--){//매트 길이만큼  큰 것부터 검사.
-            for(int j =0; j <= park.length - mats[i]; j++){//5행검사
-                for(int k = 0; k<=park[0].length - mats[i]; k++ ){//park y도 뺸다.
-                    boolean z = true;
-                    bun: 
-                    
-                    for(int f= j; f < mats[i]+j;f++){
-                        for(int h =k; h < mats[i] + k; h++){
-                            if(!park[f][h].equals("-1")){
-                                z = false;
-                                break bun;
+        
+        for (int i = mats.length - 1; i >= 0; i--) {
+            for (int j = 0; j <= rows - mats[i]; j++) {
+                for (int k = 0; k <= cols - mats[i]; k++) {
+                    boolean isMats = true;
+                    lb:
+                    for (int x = j; x < j + mats[i]; x++) {
+                        for (int y = k; y < k + mats[i]; y++) {
+                            if (!park[x][y].equals("-1")) {
+                                isMats = false;
+                                break lb;
                             }
-                            
                         }
-                        
                     }
-                
-                   if(z == false){
-                      
-                   } 
-                  else{
-                      answer = mats[i];
-                      return answer;
-                  }
-                    
-                
+                    if (isMats) {
+                        return mats[i];
+                    }
                 }
-                
             }
-            
         }
         
         return answer;
