@@ -4,28 +4,19 @@ class Solution
     public int solution(String s)
     {
         int answer = -1;
-        char[] carr = s.toCharArray();
-        Stack<Character> stack = new Stack<>();//character형 스택 생성
+
+        Stack<Character> stack = new Stack<>();
         
-
-        for(int i = 0; i<carr.length; i++){
-            char c = carr[i]; 
-            
-            if(stack.isEmpty()){
-                stack.push(c);
-            }
+        for(int i = 0; i<s.length(); i++){
+            char ch = s.charAt(i);
+            if(stack.isEmpty()) stack.push(ch);
             else{
-                if(stack.peek() == c){
-                    stack.pop();
-                }
-                else{
-                    stack.push(c);
-                }
+                if(stack.peek() == ch) stack.pop();
+                else stack.push(ch);
             }
-                
         }
-       
 
-        return stack.isEmpty() ? 1:0;
+
+        return stack.isEmpty() ? 1: 0;
     }
 }
